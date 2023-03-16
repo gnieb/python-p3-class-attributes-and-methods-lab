@@ -1,9 +1,12 @@
+import ipdb
+
 class Song:
     
     count = 0
     artists = []
     genres = []
     genre_count = {}
+    artist_count = {}
 
     def __init__(self, name, artist, genre):
         self.name = name
@@ -13,6 +16,7 @@ class Song:
         self.add_to_genres(genre)
         self.add_to_artists(artist)
         self.add_to_genre_count(genre)
+        self.add_to_artist_count(artist)
 
     @classmethod
     def add_song_to_count(cls, increment = 1):
@@ -35,14 +39,22 @@ class Song:
 
     @classmethod
     def add_to_genre_count(cls, genre):
-        for x, y in cls.genre_count.items():
-            if x == genre:
-                # cls.genre_count[x] =  y + 1
-                print(x,y)
-            else: 
-                cls.genre_count.update({genre: 1})
+        if genre in cls.genre_count:
+            cls.genre_count[genre] += 1
+        else: 
+            cls.genre_count[genre] = 1
+
+    @classmethod
+    def add_to_artist_count(cls, artist):
+        if artist in cls.artist_count:
+            cls.artist_count[artist] += 1
+        else:
+            cls.artist_count[artist] = 1
             
 
-grace = Song('grace', 'me', 'Rap')
-print(Song.genre_count)
-# print(grace.genre)
+# grace = Song('grace', 'me', 'Rap')
+# noah = Song('noah', 'him', 'Rap')
+
+# ipdb.set_trace()
+# print(Song.genre_count)
+# # print(grace.genre)
